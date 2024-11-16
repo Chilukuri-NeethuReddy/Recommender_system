@@ -27,6 +27,9 @@ To run this project in Google Colab, ensure you have the following libraries ins
 ```python
 !pip install pandas numpy scikit-learn surprise matplotlib seaborn
 ```
+#### *Output*:
+![Screenshot 2024-11-16 120645](https://github.com/user-attachments/assets/fc9ac10d-c5df-4945-a36a-daa725267b42)
+
 ---
 
 ## *Instructions for Running the Model*
@@ -39,6 +42,8 @@ from google.colab import files
 # Upload the dataset
 uploaded = files.upload()
 ```
+#### *Output*:
+![Screenshot 2024-11-16 102006](https://github.com/user-attachments/assets/95beb152-abf0-4647-9a0b-5ab4b01b1c13)
 
 ---
 
@@ -59,36 +64,45 @@ df = pd.read_csv("amazon.csv")
 print(df.head())
 ```
 
-#### *Output*:![Screenshot 2024-11-16 120645](https://github.com/user-attachments/assets/24b7a80f-9477-4167-939d-2c3cfba2a4e0)
+#### *Output*:
+![Screenshot 2024-11-16 120718](https://github.com/user-attachments/assets/b40d8cf1-f0ce-4fe6-a9f3-948a5132b086)
 
-python
+
+```python
 # Display unique users and products
 print(f"Unique users: {df['user_id'].nunique()}, Unique products: {df['product_id'].nunique()}")
-
+```
+#### *Output*:
+![Screenshot 2024-11-16 122225](https://github.com/user-attachments/assets/c64f2e69-8d1c-4ca9-a076-ceb6136ca1bf)
 
 #### *Product Popularity Visualization*:
-python
+```python
 product_popularity = df['product_id'].value_counts()
-sns.barplot(x=product_popularity.index[:10], y=product_popularity.values[:10])
+sns.barplot(x=product_popularity.index, y=product_popularity.values)
 plt.title("Product Popularity")
 plt.xlabel("Product ID")
 plt.ylabel("Number of Purchases")
-plt.xticks(rotation=90)
 plt.show()
+```
+#### *Output*:
+![Screenshot 2024-11-16 120739](https://github.com/user-attachments/assets/d1e62f3e-8965-47e6-a4f2-87fb2b2238d7)
 
 
 #### *User Activity Visualization*:
-python
+```python
 user_activity = df['user_id'].value_counts()
 sns.histplot(user_activity, bins=5, kde=True)
 plt.title("User Activity Distribution")
 plt.xlabel("Number of Purchases")
 plt.ylabel("Frequency")
 plt.show()
+```
+#### *Output*:
+![Screenshot 2024-11-16 120810](https://github.com/user-attachments/assets/1273d6fa-4354-4b41-af08-c804738e52ff)
 
 
 #### *Clean the Ratings Column*:
-python
+```python
 df['rating'] = pd.to_numeric(df['rating'], errors='coerce')
 df = df.dropna(subset=['rating'])
 
@@ -101,38 +115,42 @@ reader = Reader(rating_scale=(1, 5))
 data = Dataset.load_from_df(df[['user_id', 'product_id', 'rating']], reader)
 
 print("Data loaded successfully into Surprise!")
-
+```
+#### *Output*:
+![Screenshot 2024-11-16 120823](https://github.com/user-attachments/assets/f3566786-3142-4f92-b753-d5ef2e7eefb7)
 
 ---
 
 ### *3. Train-Test Split*
 Split the dataset into training and testing sets:
-python
+```python
 trainset, testset = train_test_split(data.build_full_trainset().build_testset(), test_size=0.2, random_state=42)
-
+```
 
 ---
 
 ### *4. Train the SVD Model*
 Fit the SVD model on the training set:
-python
+```python
 svd = SVD()
 svd.fit(data.build_full_trainset())
-
+```
 
 ---
 
 ### *5. Evaluate Model Performance*
 Evaluate the model using cross-validation:
-python
+```python
 cross_validate(svd, data, measures=['RMSE', 'MAE'], cv=5, verbose=True)
-
+```
+#### *Output*:
+![Screenshot 2024-11-16 120943](https://github.com/user-attachments/assets/3ff1f8d9-de3a-46e0-ba66-de427b1f00a2)
 
 ---
 
 ### *6. Generate Recommendations*
 Generate and display personalized recommendations for a specific user:
-python
+```python
 user_id = 'AG3D6O4STAQKAY2UVGEUV46KN35Q'  # Replace with an actual user ID from your dataset
 all_product_ids = df['product_id'].unique()
 
@@ -147,6 +165,9 @@ recommendations = sorted(predictions, key=lambda x: x[1], reverse=True)
 print("Top Recommendations for User:")
 for product_id, rating in recommendations[:5]:
     print(f"Product ID: {product_id}, Predicted Rating: {rating:.2f}")
+```
+#### *Output*:
+![Screenshot 2024-11-16 121025](https://github.com/user-attachments/assets/59c5be26-81f6-48b6-b421-b8d17ced8fe7)
 
 
 ---
