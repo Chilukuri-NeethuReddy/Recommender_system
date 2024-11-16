@@ -28,7 +28,8 @@ To run this project in Google Colab, ensure you have the following libraries ins
 !pip install pandas numpy scikit-learn surprise matplotlib seaborn
 ```
 #### *Output*:
-![Screenshot 2024-11-16 120645](https://github.com/user-attachments/assets/fc9ac10d-c5df-4945-a36a-daa725267b42)
+![pip](https://github.com/user-attachments/assets/7742d6b9-f7f2-42de-9cfb-cb87902ce257)
+
 
 ---
 
@@ -43,7 +44,8 @@ from google.colab import files
 uploaded = files.upload()
 ```
 #### *Output*:
-![Screenshot 2024-11-16 102006](https://github.com/user-attachments/assets/95beb152-abf0-4647-9a0b-5ab4b01b1c13)
+![datasetload](https://github.com/user-attachments/assets/115b26a1-fd86-4122-b9c9-b2e31d40e238)
+
 
 ---
 
@@ -65,7 +67,8 @@ print(df.head())
 ```
 
 #### *Output*:
-![Screenshot 2024-11-16 120718](https://github.com/user-attachments/assets/b40d8cf1-f0ce-4fe6-a9f3-948a5132b086)
+![dataset](https://github.com/user-attachments/assets/9b2aed47-f9a3-48cb-b0ea-fe95eb11d5ca)
+
 
 
 ```python
@@ -73,7 +76,8 @@ print(df.head())
 print(f"Unique users: {df['user_id'].nunique()}, Unique products: {df['product_id'].nunique()}")
 ```
 #### *Output*:
-![Screenshot 2024-11-16 122225](https://github.com/user-attachments/assets/c64f2e69-8d1c-4ca9-a076-ceb6136ca1bf)
+![Screenshot 2024-11-16 122225](https://github.com/user-attachments/assets/2ae8c4e6-4269-4593-8311-29dcb755e8e3)
+
 
 #### *Product Popularity Visualization*:
 ```python
@@ -85,7 +89,7 @@ plt.ylabel("Number of Purchases")
 plt.show()
 ```
 #### *Output*:
-![Screenshot 2024-11-16 120739](https://github.com/user-attachments/assets/d1e62f3e-8965-47e6-a4f2-87fb2b2238d7)
+![plot1](https://github.com/user-attachments/assets/e58d529d-e905-4acc-9870-bf808061539b)
 
 
 #### *User Activity Visualization*:
@@ -97,8 +101,8 @@ plt.xlabel("Number of Purchases")
 plt.ylabel("Frequency")
 plt.show()
 ```
-#### *Output*:
-![Screenshot 2024-11-16 120810](https://github.com/user-attachments/assets/1273d6fa-4354-4b41-af08-c804738e52ff)
+#### *Output*:![plot2](https://github.com/user-attachments/assets/a0af6835-235e-44e6-9abf-eb5b845a255e)
+
 
 
 #### *Clean the Ratings Column*:
@@ -117,7 +121,8 @@ data = Dataset.load_from_df(df[['user_id', 'product_id', 'rating']], reader)
 print("Data loaded successfully into Surprise!")
 ```
 #### *Output*:
-![Screenshot 2024-11-16 120823](https://github.com/user-attachments/assets/f3566786-3142-4f92-b753-d5ef2e7eefb7)
+![dataloaded](https://github.com/user-attachments/assets/7daf5118-0ccd-44e4-92eb-bda23e410149)
+
 
 ---
 
@@ -144,7 +149,8 @@ Evaluate the model using cross-validation:
 cross_validate(svd, data, measures=['RMSE', 'MAE'], cv=5, verbose=True)
 ```
 #### *Output*:
-![Screenshot 2024-11-16 120943](https://github.com/user-attachments/assets/3ff1f8d9-de3a-46e0-ba66-de427b1f00a2)
+![validation](https://github.com/user-attachments/assets/9b2a973b-0dcc-4d72-9e1f-2a2e2b510f78)
+
 
 ---
 
@@ -167,7 +173,8 @@ for product_id, rating in recommendations[:5]:
     print(f"Product ID: {product_id}, Predicted Rating: {rating:.2f}")
 ```
 #### *Output*:
-![Screenshot 2024-11-16 121025](https://github.com/user-attachments/assets/59c5be26-81f6-48b6-b421-b8d17ced8fe7)
+![Screenshot 2024-11-16 123009](https://github.com/user-attachments/assets/6ba0d70c-611f-4f37-8525-cb0a41806a84)
+
 
 
 ---
