@@ -24,29 +24,28 @@ The dataset used in this project is sourced from Amazon and contains the followi
 
 ## *Installation*
 To run this project in Google Colab, ensure you have the following libraries installed:
-python
+```python
 !pip install pandas numpy scikit-learn surprise matplotlib seaborn
-
-
+```
 ---
 
 ## *Instructions for Running the Model*
 
 ### *1. Upload the Dataset*
 Upload the dataset (amazon.csv) to Google Colab using the following code:
-python
+```python
 from google.colab import files
 
 # Upload the dataset
 uploaded = files.upload()
-
+```
 
 ---
 
 ### *2. Load and Prepare Data*
 Load the dataset into a pandas DataFrame, explore it, and clean the data:
 
-python
+```python
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
@@ -58,9 +57,10 @@ import seaborn as sns
 # Load dataset
 df = pd.read_csv("amazon.csv")
 print(df.head())
+```
 
+#### *Output*:![Screenshot 2024-11-16 120645](https://github.com/user-attachments/assets/24b7a80f-9477-4167-939d-2c3cfba2a4e0)
 
-#### *Output*:
 python
 # Display unique users and products
 print(f"Unique users: {df['user_id'].nunique()}, Unique products: {df['product_id'].nunique()}")
